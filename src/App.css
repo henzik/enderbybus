@@ -1,0 +1,51 @@
+body
+{
+  background-color: #607D8B;
+  color: #757575;
+  padding: 12px;
+}
+.h-header
+{
+  font-weight: 800;
+  background-color: #455A64;
+  color: #BDBDBD;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 12px;
+}
+.h-status-desc
+{
+  font-size: 10px;
+  font-weight: 100;
+}
+.h-bus-row
+{
+  width: 100%;
+  margin-bottom:12px;
+}
+.h-card
+{
+  background-color: #ffffff;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 1px
+}
+.h-bus-num
+{
+  font-weight: 800;
+  font-size: 14pt;
+  margin-right: 6px;
+  display: inline;
+}
+.inline
+{
+  display: inline;
+}
+.floatRight
+{
+  float:Right;
+}
