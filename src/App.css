@@ -2,7 +2,12 @@ body
 {
   background-color: #607D8B;
   color: #757575;
-  padding: 12px;
+  padding: 8px;
+}
+.divider
+{
+  margin-top: 8px;
+  padding: 0;
 }
 .h-header
 {
@@ -13,10 +18,21 @@ body
   border-top-right-radius: 8px;
   padding: 12px;
 }
+.h-header-full
+{
+  font-weight: 800;
+  background-color: #455A64;
+  color: #BDBDBD;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 12px;
+}
 .h-status-desc
 {
   font-size: 10px;
-  font-weight: 100;
+  font-weight: 200;
 }
 .h-bus-row
 {
@@ -48,4 +64,45 @@ body
 .floatRight
 {
   float:Right;
+}
+.flex-container
+{
+  display: flex;
+}
+.hBtnLeft
+{
+  background-color: #ffffff;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  flex-grow:1;
+  float: left;
+}
+.hBtnRight
+{
+  background-color: #ffffff;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  flex-grow:1;
+  float: Right;
+}
+
+@media screen and (max-width: 500px) {
+  .hBtnLeft
+  {
+    display: none;
+  }
+  .hBtnRight
+  {
+    display: none;
+  }
 }

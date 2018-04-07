@@ -1,70 +1,53 @@
 import React, { Component } from 'react';
 import './App.css';
-import HRow from './row.js'
+import FontAwesome from 'react-fontawesome';
+import HLineStatus from './components/HLineStatus.js'
+import HBusStatus from './components/HBusStatus.js'
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = ({busLoading: true, lineLoading: true});
-    this.refresh = this.refresh.bind(this);
+    this.state = ({
+      lineId: 'Jubilee',
+      //stopIds: '490010374B,490010374C',
+      stopIds: '490013840R',
+      desiredRoutes: '188,422'
+    });
+    this.homebound = this.homebound.bind(this);
+    this.workbound = this.workbound.bind(this);
   }
 
- refresh() {
-  this.setState({busLoading: true, lineLoading: true});
-  fetch('https://api.tfl.gov.uk/Line/jubilee/Status')
-    .then((response) => response.json())
-    .then((responseJson) => {
-    
+  homebound() {
     this.setState({
-      lineLoading: false,
-      lineStatus: (responseJson[0].lineStatuses[0]),});
-    })
-    .catch((error) =>{
-      console.error(error);
-    });
-
-  fetch('https://api.tfl.gov.uk/StopPoint/490013840R/Arrivals')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      responseJson.sort(function(a, b) {
-        return a.timeToStation > b.timeToStation
-      });
-
-      this.setState({
-        busLoading: false,
-        busStatus: (responseJson),});
-    })
-    .catch((error) =>{
-      console.error(error);
-    });
- }
-
-  componentDidMount(){
-  this.interval = setInterval(this.refresh, 45000);
-  this.refresh();    
+      stopIds: '490010374B,490010374C',});
   }
 
-  render() {
-    if(this.state.lineLoading || this.state.busLoading) {
-      return(<div>LOADING</div>);
-    }
-    var busTimes = this.state.busStatus.map(bus => {
-        return <HRow
-        busRoute={bus.lineId}
-        busDestination="North Greenwich"
-        timeToArrival={Math.round(bus.timeToStation / 60)}
-      />
-    });
+  workbound() {
+    this.setState({
+      stopIds: '490013840R',});
+  }
+
+  render() { //490010374B
     return (
       <div className="App">
-        <div className="h-header">
-          Jubilee Line - {this.state.lineStatus.statusSeverityDescription}
-          <div className="h-status-desc">{this.state.lineStatus.reason}</div>
-        </div>
-        <div className="h-card">
-          {busTimes}
-          
+        <HLineStatus lineId={this.state.lineId}/>
+        <div className='divider' />        
+        <HBusStatus stopIds={this.state.stopIds}
+          desiredRoutes={this.state.desiredRoutes}>
+        </HBusStatus> 
+        <br />
+        <div className='flex-container'>
+          <div className="hBtnLeft" onClick={this.homebound}>
+          <FontAwesome name='home'
+          style={{ marginRight: '8px'}}
+          />  Home
+          </div>
+          <div className="hBtnRight" onClick={this.workbound}>
+          <FontAwesome name='briefcase'
+          style={{ marginRight: '8px'}}
+          /> Work
+          </div>
         </div>
       </div>
     );
