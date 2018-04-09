@@ -3,6 +3,7 @@ body
   background-color: #607D8B;
   color: #757575;
   padding: 8px;
+  cursor: none; 
 }
 .divider
 {
@@ -72,6 +73,7 @@ body
 .hBtnLeft
 {
   background-color: #ffffff;
+  color: #BDBDBD;
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
   box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
@@ -85,6 +87,7 @@ body
 .hBtnRight
 {
   background-color: #ffffff;
+  color: #BDBDBD;
   border-bottom-right-radius: 8px;
   border-top-right-radius: 8px;
   box-shadow: 0 3px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
@@ -95,8 +98,12 @@ body
   flex-grow:1;
   float: Right;
 }
+.active
+{
+  color: #455A64;
+}
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 410px) {
   .hBtnLeft
   {
     display: none;

@@ -23,7 +23,7 @@ export default class HBusStatus extends Component {
       busLoading: true,
       busArrivals: {}
     });
-    const grabArrivals = url => fetch('https://api.tfl.gov.uk/StopPoint/'+ url +'/Arrivals')
+    const grabArrivals = url => fetch('https://api.tfl.gov.uk/StopPoint/'+ url +'/Arrivals?app_id=02674c92&app_key=b2d15afec764f37e0110484a3d718df2')
       .then((response) => response.json())
       .then((responseJson) => {
         var filteredJson = responseJson.filter((bus) => this.state.desiredRoutes.includes(bus.lineId));

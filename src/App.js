@@ -10,9 +10,10 @@ class App extends Component {
     super(props);
     this.state = ({
       lineId: 'Jubilee',
-      //stopIds: '490010374B,490010374C',
       stopIds: '490013840R',
-      desiredRoutes: '188,422'
+      desiredRoutes: '188,422',
+      isHomebound: false,
+      isWorkbound: true
     });
     this.homebound = this.homebound.bind(this);
     this.workbound = this.workbound.bind(this);
@@ -20,12 +21,18 @@ class App extends Component {
 
   homebound() {
     this.setState({
-      stopIds: '490010374B,490010374C',});
+      stopIds: '490010374B,490010374C',
+      isHomebound: true,
+      isWorkbound: false
+    });
   }
 
   workbound() {
     this.setState({
-      stopIds: '490013840R',});
+      stopIds: '490013840R',
+      isHomebound: false,
+      isWorkbound: true
+    });
   }
 
   render() { //490010374B
@@ -38,12 +45,12 @@ class App extends Component {
         </HBusStatus> 
         <br />
         <div className='flex-container'>
-          <div className="hBtnLeft" onClick={this.homebound}>
+          <div className={this.state.isHomebound ? 'hBtnLeft active' : 'hBtnLeft'} onClick={this.homebound}>
           <FontAwesome name='home'
           style={{ marginRight: '8px'}}
           />  Home
           </div>
-          <div className="hBtnRight" onClick={this.workbound}>
+          <div className={this.state.isWorkbound ? 'hBtnRight active' : 'hBtnRight'} onClick={this.workbound}>
           <FontAwesome name='briefcase'
           style={{ marginRight: '8px'}}
           /> Work
