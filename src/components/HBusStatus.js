@@ -8,7 +8,7 @@ export default class HBusStatus extends Component {
         busLoading: true,
         desiredRoutes: this.props.desiredRoutes.split(','),
         busStops: this.props.stopIds.split(','),
-        busArrivals: {}
+        busArrivals: []
       });
       this.refresh = this.refresh.bind(this);
   }
@@ -21,7 +21,7 @@ export default class HBusStatus extends Component {
   refresh() {
     this.setState({
       busLoading: true,
-      busArrivals: {}
+      busArrivals: []
     });
     const grabArrivals = url => fetch('https://api.tfl.gov.uk/StopPoint/'+ url +'/Arrivals?app_id=02674c92&app_key=b2d15afec764f37e0110484a3d718df2')
       .then((response) => response.json())
@@ -35,11 +35,9 @@ export default class HBusStatus extends Component {
 
     Promise
       .all(this.state.busStops.map(grabArrivals))
-      .then(() =>{
+      .then(() => {
         var sortedJson = this.state.busArrivals;
-        sortedJson.sort(function(a, b) {
-          return a.timeToStation > b.timeToStation
-        });
+        sortedJson.sort((a, b) => (a.timeToStation > b.timeToStation) ? 1 : -1);
         this.setState({
           busLoading: false,
           busArrivals: sortedJson,
@@ -55,30 +53,19 @@ export default class HBusStatus extends Component {
   }
   
   render() {
-    if (this.state.busLoading) {
-      return (
-        <div>
-          <div className="h-header">
-          </div>
-          <div className="h-card">
-          </div>       
-        </div>
-      );
-    }
-    var busTimes = this.state.busArrivals.map((element, index) => {
-      return <HRow key={'bus'+index}
-      busRoute={element.lineId}
-      busDestination={element.destinationName}
-      timeToArrival={Math.floor(element.timeToStation / 60)}
-    />
-    });
     return (
       <div>
         <div className="h-header">
           Bus Arrivals
         </div>
         <div className="h-card">
-          {busTimes}
+          {this.state.busArrivals.map(element => (
+          <HRow
+            busRoute={element.lineId}
+            busDestination={element.destinationName}
+            timeToArrival={Math.floor(element.timeToStation / 60)}
+          />
+          ))}
         </div>       
       </div>
     );
